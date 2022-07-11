@@ -5,27 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, height=device-height">
     <title>编辑笔记</title>
-    <style>
-        #container {
-            margin: 0 10px;
-            border: 1px solid #ccc;
-        }
 
-        #toolbar-container {
-            border-bottom: 1px solid #ccc;
-        }
-
-        #editor-container {
-            height: 500px;
-        }
-    </style>
+    <!-- TODO：转为引用项目中的文件 -->
     <link href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet">
+    <link href="./src/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <p>wangEditor v5 demo</p>
-    <div id="container">
-        <div id="toolbar-container"></div>
-        <div id="editor-container"></div>
+    <div class="bottom-area">
+        <div class="btn" onclick="onClickSaveBtn()">
+            <img class="btn-icon" src="./src/images/bottom/draft-icon.png">
+            <div class="btn-txt">保存</div>
+        </div>
+        <div class="btn" onclick="onClickSaveBtn()">
+            <img class="btn-icon" src="./src/images/bottom/draft-icon.png">
+            <div class="btn-txt">复制标题</div>
+        </div>
+        <div class="btn" onclick="onClickSaveBtn()">
+            <img class="btn-icon" src="./src/images/bottom/draft-icon.png">
+            <div class="btn-txt">复制正文</div>
+        </div>
+        <div class="btn" onclick="onClickSaveBtn()">
+            <img class="btn-icon" src="./src/images/bottom/filter-icon.png">
+            <div class="btn-txt">内容过滤</div>
+        </div>
+        <div class="preview-btn">预览笔记</div>
+    </div>
+    <!-- 标题 -->
+    <div class="title-container">
+        <input class="title-input" type="text" placeholder="填写标题会有更多赞哦～" maxlength="40">
+        <div class="title-word-count">20</div>
+    </div>
+    <div class="line"></div>
+    <div class="body-container">
+        <div id="body-editor"></div>
+    </div>
+    <div class="body-word-count">239/1000</div>
+    <!-- <button type="button" onclick="render()">Click Me!</button> -->
+
+    <div class="tool-bar">
+        <div class="tool-item">
+            <img class="tool-icon" src="./src/images/tool/all-icon.png">
+        </div>
+        <div class="tool-item">
+            <img class="tool-icon" src="./src/images/tool/heading-icon.png">
+        </div>
+        <div class="tool-item">
+            <img class="tool-icon" src="./src/images/tool/ol-icon.png">
+        </div>
+        <div class="tool-item">
+            <img class="tool-icon" src="./src/images/tool/ul-icon.png">
+        </div>
+        <div class="tool-item">
+            <img class="tool-icon" src="./src/images/tool/el-icon.png">
+        </div>
+        <div class="tool-item">
+            <img class="tool-icon" src="./src/images/tool/emoji-icon.png">
+        </div>
+        <div class="tool-item">
+            <img class="tool-icon" src="./src/images/tool/topic-icon.png">
+        </div>
+        <div class="fold-keyboard-btn" catchtouchend="onClickKeyboardBtn">
+            <img class="fold-keyboard-icon" src="./src/images/tool/keyboard-icon.png"></img>
+        </div>
+    </div>
+    <div class="tool-container">
+
     </div>
 
     <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
@@ -35,30 +79,28 @@
 
         // 编辑器配置
         const editorConfig = {}
-        editorConfig.placeholder = '请输入内容'
+        editorConfig.placeholder = '添加正文'
+       
         editorConfig.onChange = (editor) => {
             // 当编辑器选区、内容变化时，即触发
             console.log('content', editor.children)
             console.log('html', editor.getHtml())
+            if (/\d/.test(editor.getHtml())) {
+                editor.setHtml('<p>hello world</p>')
+            }
         }
 
-        // 工具栏配置
-        const toolbarConfig = {}
+        function render() {
+            editor.setHtml('<p>hello world</p>')
+        }
 
         // 创建编辑器
         const editor = createEditor({
-            selector: '#editor-container',
+            selector: '#body-editor',
             config: editorConfig,
             mode: 'default' // 或 'simple' 参考下文
         })
 
-        // 创建工具栏
-        const toolbar = createToolbar({
-            editor,
-            selector: '#toolbar-container',
-            config: toolbarConfig,
-            mode: 'default' // 或 'simple' 参考下文
-        })
     </script>
 </body>
 </html>
