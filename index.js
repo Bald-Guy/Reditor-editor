@@ -5,9 +5,10 @@ const app = express()
 // app.get('/', (req, res) => {
 //   res.send('欢迎使用微信云托管！')
 // })
+app.use(express.static(path.join(__dirname, '/src')))
 
 app.get("/", async (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "src/index.html"));
 })
 
 const port = process.env.PORT || 80
