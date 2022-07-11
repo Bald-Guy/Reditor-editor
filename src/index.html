@@ -85,8 +85,11 @@
             // 当编辑器选区、内容变化时，即触发
             console.log('content', editor.children)
             console.log('html', editor.getHtml())
-            if (/\d/.test(editor.getHtml())) {
-                editor.setHtml('<p>hello world</p>')
+            console.log('text', editor.getText())
+            if (/<p>- /.test(editor.getHtml())) {
+                let newHtml = editor.getHtml().replace(/<p>- /g, '<p>😄')
+                console.log(newHtml);
+                setTimeout(() => editor.setHtml(newHtml))
             }
         }
 
