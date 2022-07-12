@@ -77,7 +77,12 @@
  
 
     <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
+    <script src="./js/keyboard.js"></script>
     <script>
+        var title_input = document.querySelector('.title-input');
+
+
+        listenInputKeybord(title_input);
         var E = window.wangEditor; // 全局变量
         const { createEditor, createToolbar } = window.wangEditor
 
@@ -87,6 +92,13 @@
             scroll: false
         }
 
+        editorConfig.onFocus = (editor) => {
+            listenEditorKeyboard_pop()
+        }
+
+        editorConfig.onBlur = (editor) => {
+            listenEditorKeyboard_fold()
+        }
        
         editorConfig.onChange = (editor) => {
             // 当编辑器选区、内容变化时，即触发
