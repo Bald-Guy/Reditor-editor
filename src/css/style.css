@@ -2,11 +2,17 @@
     margin: 0;
     padding: 0;
 }
+.page {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
 /* 标题区域 */
 .title-container {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding-top: 25px;
     margin: 0 16px;
 }
 .title-input {
@@ -32,18 +38,19 @@
 }
 /* 正文区域 */
 .body-container {
-    height: 400px;
+    height: 300px;
     margin: 0 6px;
     font-size: 15px;
     letter-spacing: 0.3px;
     color: #363636;
+    overflow-y: auto;
 }
 p {
     margin: 0 !important;
     line-height: 25px !important;
 }
 .body-editor {
-    
+    min-height: 300px;
 }
 .w-e-text-placeholder {
     font-size: 14px;
@@ -63,9 +70,10 @@ p {
 }
 /* 底部区域 */
 .bottom-area {
-    /* width: 686rpx;
+    width: 100%;
+    box-sizing: border-box;
     position: fixed;
-    bottom: 0; */
+    bottom: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -154,4 +162,9 @@ p {
 .fold-keyboard-icon {
     width: 26px;
     height: 26px;
+}
+/* 工具栏选区 */
+.tool-container {
+    height: 400px;
+    /* background-color: #989898; */
 }

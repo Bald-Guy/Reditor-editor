@@ -11,66 +11,70 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <div class="bottom-area">
-        <div class="btn" onclick="onClickSaveBtn()">
-            <img class="btn-icon" src="./images/bottom/draft-icon.png">
-            <div class="btn-txt">保存</div>
+    <div class="page">
+        <div class="bottom-area">
+            <div class="btn" onclick="onClickSaveBtn()">
+                <img class="btn-icon" src="./images/bottom/draft-icon.png">
+                <div class="btn-txt">保存</div>
+            </div>
+            <div class="btn" onclick="onClickSaveBtn()">
+                <img class="btn-icon" src="./images/bottom/draft-icon.png">
+                <div class="btn-txt">复制标题</div>
+            </div>
+            <div class="btn" onclick="onClickSaveBtn()">
+                <img class="btn-icon" src="./images/bottom/draft-icon.png">
+                <div class="btn-txt">复制正文</div>
+            </div>
+            <div class="btn" onclick="onClickSaveBtn()">
+                <img class="btn-icon" src="./images/bottom/filter-icon.png">
+                <div class="btn-txt">内容过滤</div>
+            </div>
+            <div class="preview-btn">预览笔记</div>
         </div>
-        <div class="btn" onclick="onClickSaveBtn()">
-            <img class="btn-icon" src="./images/bottom/draft-icon.png">
-            <div class="btn-txt">复制标题</div>
+        <!-- 标题 -->
+        <div class="title-container">
+            <input class="title-input" type="text" placeholder="填写标题会有更多赞哦～" maxlength="40">
+            <div class="title-word-count">20</div>
         </div>
-        <div class="btn" onclick="onClickSaveBtn()">
-            <img class="btn-icon" src="./images/bottom/draft-icon.png">
-            <div class="btn-txt">复制正文</div>
+        <div class="line"></div>
+        <div class="body-container">
+            <div id="body-editor"></div>
         </div>
-        <div class="btn" onclick="onClickSaveBtn()">
-            <img class="btn-icon" src="./images/bottom/filter-icon.png">
-            <div class="btn-txt">内容过滤</div>
+        <div class="body-word-count">239/1000</div>
+        <!-- <button type="button" onclick="render()">Click Me!</button> -->
+    
+        <div class="tool-bar">
+            <div class="tool-item">
+                <img class="tool-icon" src="./images/tool/all-icon.png">
+            </div>
+            <div class="tool-item">
+                <img class="tool-icon" src="./images/tool/heading-icon.png">
+            </div>
+            <div class="tool-item">
+                <img class="tool-icon" src="./images/tool/ol-icon.png">
+            </div>
+            <div class="tool-item">
+                <img class="tool-icon" src="./images/tool/ul-icon.png">
+            </div>
+            <div class="tool-item">
+                <img class="tool-icon" src="./images/tool/el-icon.png">
+            </div>
+            <div class="tool-item">
+                <img class="tool-icon" src="./images/tool/emoji-icon.png">
+            </div>
+            <div class="tool-item">
+                <img class="tool-icon" src="./images/tool/topic-icon.png">
+            </div>
+            <div class="fold-keyboard-btn" catchtouchend="onClickKeyboardBtn">
+                <img class="fold-keyboard-icon" src="./images/tool/keyboard-icon.png"></img>
+            </div>
         </div>
-        <div class="preview-btn">预览笔记</div>
+        <button type="button" onclick="insertSomething()">加点东西</button>
+        <div class="tool-container">
+    
+        </div>
     </div>
-    <!-- 标题 -->
-    <div class="title-container">
-        <input class="title-input" type="text" placeholder="填写标题会有更多赞哦～" maxlength="40">
-        <div class="title-word-count">20</div>
-    </div>
-    <div class="line"></div>
-    <div class="body-container">
-        <div id="body-editor"></div>
-    </div>
-    <div class="body-word-count">239/1000</div>
-    <!-- <button type="button" onclick="render()">Click Me!</button> -->
-
-    <div class="tool-bar">
-        <div class="tool-item">
-            <img class="tool-icon" src="./images/tool/all-icon.png">
-        </div>
-        <div class="tool-item">
-            <img class="tool-icon" src="./images/tool/heading-icon.png">
-        </div>
-        <div class="tool-item">
-            <img class="tool-icon" src="./images/tool/ol-icon.png">
-        </div>
-        <div class="tool-item">
-            <img class="tool-icon" src="./images/tool/ul-icon.png">
-        </div>
-        <div class="tool-item">
-            <img class="tool-icon" src="./images/tool/el-icon.png">
-        </div>
-        <div class="tool-item">
-            <img class="tool-icon" src="./images/tool/emoji-icon.png">
-        </div>
-        <div class="tool-item">
-            <img class="tool-icon" src="./images/tool/topic-icon.png">
-        </div>
-        <div class="fold-keyboard-btn" catchtouchend="onClickKeyboardBtn">
-            <img class="fold-keyboard-icon" src="./images/tool/keyboard-icon.png"></img>
-        </div>
-    </div>
-    <div class="tool-container">
-
-    </div>
+ 
 
     <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
     <script>
@@ -78,8 +82,11 @@
         const { createEditor, createToolbar } = window.wangEditor
 
         // 编辑器配置
-        const editorConfig = {}
-        editorConfig.placeholder = '添加正文'
+        const editorConfig = {
+            placeholder: '添加正文',
+            scroll: false
+        }
+
        
         editorConfig.onChange = (editor) => {
             // 当编辑器选区、内容变化时，即触发
@@ -103,6 +110,21 @@
             config: editorConfig,
             mode: 'default' // 或 'simple' 参考下文
         })
+
+        function insertSomething() {
+            console.log("加入东西");
+            const node1 = { 
+                type: 'text', 
+                text: 'simple text',
+                color: '#eb903a'
+            }
+            const node2 = { 
+                type: 'text', 
+                text: ' ',
+            }
+            editor.insertNode(node1)
+            editor.insertNode(node2)
+        }
 
     </script>
 </body>
